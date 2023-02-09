@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: mariadb:latest
+    container_name: database-container
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: 11623579
+      MYSQL_DATABASE: s3-individual-mariadb-db
+    ports:
+      - 3306:3306
+
+  s3-individual:
+    image: s3-individual:latest
+    container_name: s3-individual-backend
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      MYSQL-HOST: database-container
+      USER: root
+      PASSWORD: 11623579
+      PORT: 3306
+    restart: always

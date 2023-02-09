@@ -1,0 +1,2 @@
+ALTER TABLE person
+    MODIFY COLUMN password varchar(300) DEFAULT NULL
